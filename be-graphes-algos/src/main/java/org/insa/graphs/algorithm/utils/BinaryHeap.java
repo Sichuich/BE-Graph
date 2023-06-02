@@ -83,7 +83,6 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
         this.arraySet(index, x);
     }
-
     /**
      * Internal method to percolate down in the heap.
      * 
@@ -137,7 +136,15 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     @Override
     public void remove(E x) throws ElementNotFoundException {
-        // TODO:
+        // DONE:
+        int index = array.indexOf(x);
+        if (isEmpty() || index < 0 || index >= this.currentSize) {
+            throw new ElementNotFoundException(x); 
+        }
+        E last = this.array.get(--this.currentSize);
+        this.arraySet(index,last);
+        this.percolateUp(index);
+        this.percolateDown(index);
     }
 
     @Override
